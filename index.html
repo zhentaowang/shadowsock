@@ -62,9 +62,9 @@ password        用于加密传输的密码
 timeout         服务器端选项，以秒为单位
 </code></pre>
 
-<p>服务器上执行 <code>shadowsocks-server &amp;</code> 即可。</p>
+<p>服务器上执行 <code>shadowsocks-server &amp;</code> 即可。Linux 服务器也可以使用提供的<a href="https://github.com/shadowsocks/shadowsocks-go/blob/master/sample-config/shadowsocks">启动脚本</a>，注意修改脚本开头的路径。</p>
 
-<p>客户机器上执行 <code>shadowsocks-local &amp;</code>，修改浏览器代理为 SOCKS5 代理。</p>
+<p>Linux/OS X 客户机端执行 <code>shadowsocks-local &amp;</code>，修改浏览器代理为 SOCKS5 代理。Windows/OS X 客户端可以直接双击执行。</p>
 
 <pre><code>SOCKS5 127.0.0.1:local_port
 </code></pre>
