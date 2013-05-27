@@ -57,7 +57,8 @@ go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-local
 <pre><code>server          服务器 ip 或者 host name
 server_port     服务器监听的端口
 local_port      客户端本地 socks5 代理端口
-method          加密方法，默认 null，可以指定为 rc4
+method          加密方法，默认 null，可以指定下列选项
+                    aes-128-cfb, aes-192-cfb, aes-256-cfb, bf-cfb, cast5-cfb, des-cfb, rc4
 password        用于加密传输的密码
 timeout         服务器端选项，以秒为单位
 </code></pre>
