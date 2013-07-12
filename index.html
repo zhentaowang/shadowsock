@@ -30,13 +30,15 @@
 
       </header>
       <section>
-        <h1>shadowsocks-go</h1>
+        <h1>
+<a name="shadowsocks-go" class="anchor" href="#shadowsocks-go"><span class="octicon octicon-link"></span></a>shadowsocks-go</h1>
 
 <p>shadowsocks-go 是一个轻量级的隧道代理，用来穿透防火墙。它是 <a href="https://github.com/clowwindy/shadowsocks">shadowsocks</a> 的一个分支，两者协议兼容（都升级到最新版本）。</p>
 
 <p>注意 <strong>shadowsocks-go 必须有独立的服务器才可使用</strong>。</p>
 
-<h1>安装</h1>
+<h1>
+<a name="" class="anchor" href="#"><span class="octicon octicon-link"></span></a>安装</h1>
 
 <p>访问<a href="http://dl.chenyufei.info/shadowsocks">这个网页</a>可以下载编译好的可执行文件。</p>
 
@@ -48,7 +50,8 @@ go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-server
 go get github.com/shadowsocks/shadowsocks-go/cmd/shadowsocks-local
 </code></pre>
 
-<h1>使用方法</h1>
+<h1>
+<a name="-1" class="anchor" href="#-1"><span class="octicon octicon-link"></span></a>使用方法</h1>
 
 <p>客户端和服务器端默认在当前目录下寻找 <code>config.json</code> 配置文件。可以使用 <code>-c</code> 选项指定其他配置文件。</p>
 
@@ -70,17 +73,30 @@ timeout         服务器端选项，以秒为单位
 <pre><code>SOCKS5 127.0.0.1:local_port
 </code></pre>
 
-<h2>命令行选项</h2>
+<h2>
+<a name="-2" class="anchor" href="#-2"><span class="octicon octicon-link"></span></a>关于加密方法</h2>
+
+<p>shadowsocks-go 推荐使用 AES 加密。（若 CPU 支持 <a href="http://en.wikipedia.org/wiki/AES_instruction_set">AES 指令集</a> 时，会使用该指令集来加速加解密。）</p>
+
+<p><strong>建议不要继续使用 table 和 rc4 加密，它们都不够安全。</strong></p>
+
+<h2>
+<a name="-3" class="anchor" href="#-3"><span class="octicon octicon-link"></span></a>命令行选项</h2>
 
 <p>命令行选项比配置文件中的选项有更高优先级。使用 <code>-h</code> 选项来查看所有支持的选项。</p>
 
-<pre><code>shadowsocks-local -s server_name -p server_port -l local_port -k password -m rc4 -c config.json
-shadowsocks-server -p server_port -k password -t timeout -m rc4 -c config.json
+<pre><code>shadowsocks-local -s server_address -p server_port -k password
+    -m rc4 -c config.json
+    -b local_address -l local_port
+shadowsocks-server -p server_port -k password
+    -m rc4 -c config.json
+    -t timeout
 </code></pre>
 
 <p><code>-d</code> 选项可以开启 debug 信息。</p>
 
-<h2>客户端指定多个服务器</h2>
+<h2>
+<a name="-4" class="anchor" href="#-4"><span class="octicon octicon-link"></span></a>客户端指定多个服务器</h2>
 
 <pre><code>server_password    指定多个服务器和密码，服务器形式为 host:port
 </code></pre>
@@ -89,7 +105,8 @@ shadowsocks-server -p server_port -k password -t timeout -m rc4 -c config.json
 
 <p>多个服务器按顺序选取，如果某个服务器无法建立连接，会自动尝试下一个服务器。客户端不会检查密码错误导致的连接问题，这样可以让用户发现配置错误。</p>
 
-<h2>服务器端多用户支持</h2>
+<h2>
+<a name="-5" class="anchor" href="#-5"><span class="octicon octicon-link"></span></a>服务器端多用户支持</h2>
 
 <p>服务器支持使用不同密码的多个用户，每个用户使用一个独立的端口。在服务器上使用下列选项来支持多用户：</p>
 
@@ -98,11 +115,13 @@ shadowsocks-server -p server_port -k password -t timeout -m rc4 -c config.json
 
 <p>配置文件例子 <a href="https://github.com/shadowsocks/shadowsocks-go/blob/master/sample-config/server-multi-port.json"><code>server-multi-port.json</code></a>。如果有 <code>port_password</code>，服务器会忽略 <code>server_port</code> 和 <code>password</code> 选项。</p>
 
-<h3>在线更新密码</h3>
+<h3>
+<a name="-6" class="anchor" href="#-6"><span class="octicon octicon-link"></span></a>在线更新密码</h3>
 
 <p>编辑用来启动服务器的配置文件，然后向服务器进程发 <code>SIGHUP</code> 信号即可。</p>
 
-<h1>OpenVZ 用户特别注意</h1>
+<h1>
+<a name="openvz-" class="anchor" href="#openvz-"><span class="octicon octicon-link"></span></a>OpenVZ 用户特别注意</h1>
 
 <p><strong>请使用支持 vswap 的 OpenVZ 虚拟机</strong>，否则系统会错误的过多统计 shadowsocks-go 使用的内存。在支持 vswap OpenVZ 虚拟机上 shadowsocks-go 启动后占用约 3MB 内存。</p>
 
