@@ -5,7 +5,6 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	ss "github.com/shadowsocks/shadowsocks-go/shadowsocks"
 	"io"
 	"log"
 	"net"
@@ -15,6 +14,8 @@ import (
 	"strconv"
 	"sync"
 	"syscall"
+
+	ss "github.com/shadowsocks/shadowsocks-go/shadowsocks"
 )
 
 var debug ss.DebugLog
@@ -148,9 +149,7 @@ func handleConnection(conn *ss.Conn) {
 			return
 		}
 	}
-	if debug {
-		debug.Printf("piping %s<->%s", conn.RemoteAddr(), host)
-	}
+	log.Printf("piping %s<->%s", conn.RemoteAddr(), host)
 	go ss.PipeThenClose(conn, remote)
 	ss.PipeThenClose(remote, conn)
 	closed = true
